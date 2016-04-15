@@ -40,7 +40,9 @@ class Barcode4jService {
 	boolean render(BarcodeGenerator generator, String msg, OutputStream out, String mimeType, Map params = [:]) {
 		def mergedParams = mergeWithDefaultParams(params)
 		def canvas = new BitmapCanvasProvider(out, mimeType, mergedParams.dpi, mergedParams.imageType, mergedParams.antiAlias, mergedParams.orientation)
-
+        generator.pattern = params.pattern
+        generator.fontSize = params.fontSize
+        generator.quietZone = params.quietZone
 		generator.generateBarcode(canvas, msg)
 		canvas.finish()
 		
